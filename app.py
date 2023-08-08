@@ -3,7 +3,7 @@ from pred import predict
 
 app= Flask(__name__)
 
-@app.route("/diabetes",methods = ["POST"])
+@app.route("/predict",methods = ["POST"])
 def index():
     try:       
         d = request.get_json()
@@ -15,8 +15,11 @@ def index():
         }
 
     except Exception as e: 
-        print(e) 
+        # print(e)
         return {
-            'message':'Error',
+            'message': str(e),
             'success':False
         } 
+
+if __name__ == "__main__":
+    app.run(debug=True)
