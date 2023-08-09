@@ -1,11 +1,20 @@
-from flask import Flask,request
+from flask import Flask,request,render_template
 from pred import predict
 
-app= Flask(__name__)
+app= Flask(__name__,template_folder='template')
+
+@app.route("/")
+def home():
+    return render_template('home.html')
+
+@app.route("/form",methods=["POST"])
+def form():
+    return render_template('form.html')
 
 @app.route("/predict",methods = ["POST"])
 def index():
     try:       
+        # print('hi')
         d = request.get_json()
         data=predict(d)
 
