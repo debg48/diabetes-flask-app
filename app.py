@@ -15,7 +15,14 @@ def form():
 def index():
     try:       
         # print('hi')
-        d = request.get_json()
+        if request.form :
+            d = request.form
+            d = dict(d)
+            for key,value in d.items():
+                d[key] = float(value)
+            # print(d)
+        else:
+            d = request.get_json()
         data=predict(d)
 
         return {
